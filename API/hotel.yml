@@ -1,0 +1,685 @@
+openapi: 3.0.0
+info:
+  title: Gestion hotel
+  version: 1.0.0
+servers:
+- url: https://Subscription.io/
+paths:
+  /hotel/bedrooms:
+    get:
+      tags:
+      - Bedroom
+      summary: get bedrooms by hotel
+      operationId: getBedroomByHotel
+      responses:
+          200:
+            description:  All bedroom filter by hotel
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Bedroom_by_hotel'
+  /bedroom:
+    post:
+      tags:
+      - Bedroom
+      summary: Add a new "Bedroom"
+      operationId: addBedRoom
+      requestBody:
+        description: This request is use to add a new "Bedroom"
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CreateBedroom'
+        required: true
+      responses:
+        200:
+          description: Bedroom added
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Bedroom'
+        400:
+          description: Bad request
+  /bedrooms:
+    get:
+      tags:
+      - Bedroom
+      summary: Get a list of "Bedroom"
+      operationId: getBedroom      
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Bedroom'
+        400:
+          description: Bad request
+  /bedroom/{id}:
+    patch:
+      tags:
+      - Bedroom
+      summary: Change some details of "Bedroom" by Id
+      operationId: pathBedroomById
+      parameters:
+      - name: Id
+        in: path
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBedroom'
+            examples:
+              changeName:
+                summary: Change Bedroom content
+                value:
+                  prixLogement: 500000
+                  typeLogement: VIP
+                  typeBedroom: 1Lit
+                  hotel: Novotel
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/Bedroom'
+        400:
+          description: bad request
+    delete:
+      tags:
+      - Bedroom
+      summary: Delete "Bedroom" by Id
+      operationId: deleteBedroom
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: successful delete
+        400:
+          description: bad request            
+  /customer:
+    post:
+      tags:
+      - Customer
+      summary: Add a new Customer
+      operationId: addCustomer
+      requestBody:
+        description: Customer object that needs to be added
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CreateCustomer'
+        required: true
+      responses:
+        200:
+          description: Customer added
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+        400:
+          description: Bad request
+  /custmers:
+    get:
+      tags:
+      - Customer
+      summary: Get a list of Customer
+      operationId: getCustomer
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+        400:
+          description: Bad request
+  /customer/{id}:
+    delete:
+      tags:
+      - Customer
+      summary: Delete a Customer by Id
+      operationId: deleteCustomerId
+      parameters:
+      - name: Id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        200: 
+          description: Successfully deleted
+        400:
+          description: Bad request
+    patch:
+      tags:
+        - Customer
+      summary: Modifie some customer details
+      operationId: updateCustomer
+      parameters:
+      - name: Id
+        in: path
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CreateCustomer'
+      responses:
+        200:
+          description: Success
+        400:
+          description: Bad request
+    get:
+      tags:
+      - Customer
+      summary: Get specific Customer by Id or by name
+      operationId: get customer by Id or name
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: name
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: last_name
+          in: query
+          required: false
+          schema: 
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+  /customer/{id}/search:
+    put:
+      tags:
+      - Customer
+      summary: Change Customer by Id
+      description: Multiple status values can be provIded with comma separated strings
+      operationId: putCustomerId
+      parameters:
+      - name: Id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: name
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: last_name
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateCustomer'
+        400:
+          description: Bad request   
+  /countries:
+    get:
+      tags:
+      - Country
+      summary: Get a list of Country
+      operationId: getCountry
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Country'
+        400:
+          description: Bad request
+  /country/{id}:
+    delete:
+      tags:
+      - Country
+      summary: Delete a Country by Id
+      operationId: deleteCountryById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        200:
+          description: Successfully deleted
+        400:
+          description: Bad request
+    put:
+      tags:
+      - Country
+      summary: Change Country by Id
+      description: Multiple status values can be provIded with comma separated strings
+      operationId: putCountryById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: country_name
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Country'
+        400:
+          description: Bad request
+  /hotels_type:
+    get:
+      tags:
+      - Hotel_type
+      summary: Get a list of hotels_type
+      operationId: getHotelType
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Hotel_type'
+        400:
+          description: Bad request
+  /hotel_type/{id}:
+    delete:
+      tags:
+      - Hotel_type
+      summary: Delete a hotel_type by Id
+      operationId: delete hotel_type by id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        200:
+          description: Successfully deleted
+        400:
+          description: Bad request
+    put:
+      tags:
+      - Hotel_type
+      summary: Change hotel_type by Id
+      description: change hotel_type type
+      operationId: putHotelType
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: hotel_type
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hotel_type'
+        400:
+          description: Bad request
+  /bedromms_type:
+    get:
+      tags:
+      - Bedroom_type
+      summary: Get a list of bedroom_type
+      operationId: getBedroom_type
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Bedroom_type'
+        400:
+          description: Bad request
+  /bedroom_type/{id}:
+    delete:
+      tags:
+      - Bedroom_type
+      summary: Delete a bedroom_type by Id
+      operationId: delete bedroom_type by id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        200:
+          description: Successfully deleted
+        400:
+          description: Bad request
+    put:
+      tags:
+      - Bedroom_type
+      summary: Change bedroom_type by Id
+      description: change bedroom_type type
+      operationId: putBedroomType
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: bedroom_type
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bedroom_type'
+        400:
+          description: Bad request
+  /location_types:
+    get:
+      tags:
+      - Location_type
+      summary: Get a list of location_type
+      operationId: getCountry
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Hotel_type'
+        400:
+          description: Bad request
+  /location_type/{id}:
+    delete:
+      tags:
+      - Location_type
+      summary: Delete a location_type by Id
+      operationId: delete location_type by id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        200:
+          description: Successfully deleted
+        400:
+          description: Bad request
+    put:
+      tags:
+      - Location_type
+      summary: Change location_type by Id
+      description: change location_type 
+      operationId: putLocationType
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: location_type
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location_type'
+        400:
+          description: Bad request
+components:
+  schemas:
+    Location_type:
+      type: object
+      properties:
+        idLocationType:
+          type: integer
+          example: 1
+        locationType:
+          type: string
+          example: VIP
+    Bedroom_type:
+      type: object
+      properties:
+        idBedroomType:
+          type: integer
+          example: 1
+        bedroomType:
+          type: string
+          example: Large
+    Bedroom_by_hotel:
+      type: object
+      properties:
+        IdBedroom:
+          type: integer
+          example: 1
+        prixLogement:
+          type: integer
+          example: 4500000
+        typeLogement: 
+          type: string
+          example: VIP
+        typeBedroom:
+          type: string
+          example: Large
+        hotel:
+          type: string
+          example: Novotel
+        country:
+          type: string
+          example: Alarobia
+    Hotel_type:
+      type: object
+      properties:
+        idHotel:
+          type: integer
+          example: 1
+        hotelType:
+          type: string
+          example: Luxe
+    CreateBedroom:
+      type: object
+      properties:
+        prixLogement:
+          type: integer
+          example: 100000
+        typeLogement:
+          type: string
+          example: VIP
+        typeBedroom:
+          type: string
+          example: Large
+        hotel:
+          type: string
+          example: Novotel
+    CreateCustomer:
+      type: object
+      properties:
+        name:
+          type: string
+          example: haritiana
+        lastName:
+          type: string
+          example: adriano
+        email:
+          type: string
+          example: hei.adriano.4@gmail.com
+        phone:
+          type: string
+          example: +261 34 76 765 58
+    Customer:
+      type: object
+      properties:
+        Id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: haritiana
+        lastName:
+          type: string
+          example: adriano
+        email:
+          type: string
+          example: hei.adriano.4@gmail.com
+        phone:
+          type: string
+          example: +261 34 76 765 58
+    Bedroom:
+      type: object
+      properties:
+        IdBedroom:
+          type: integer
+          example: 1
+        prixLogement:
+          type: integer
+          example: 50000
+        typeLogement:
+          type: string
+          example: VIP
+        typeBedroom:
+          type: string
+          example: 1lit
+        hotel:
+          type: string
+          example: Novotel
+    CreateGroup:
+      type: object
+      properties:
+        name:
+          type: string
+          example: G3
+        group:
+          type: string
+          example: goupe G3
+    Country:
+      type: object
+      properties:
+        idCountry:
+          type: integer
+          example: 1
+        countryName:
+          type: string
+          example: Antananarivo
+    error400:
+      required:
+      - type
+      - message
+      type: object
+      properties:
+        type:
+          type: string
+          example: BadRequestException
+        group:
+          type: string
+          example: Bad request
+    error403:
+      required:
+      - type
+      - message
+      type: object
+      properties:
+        type:
+          type: string
+          example: NotAuthorizedException
+        group:
+          type: string
+          example: Not authorized
+    error404:
+      required:
+      - type
+      - message
+      type: object
+      properties:
+        type:
+          type: string
+          example: ResourceNotFoundException
+        group:
+          type: string
+          example: Resource is not found
+    error500:
+      required:
+      - type
+      - message
+      type: object
+      properties:
+        type:
+          type: string
+          example: InternalServerException
+        group:
+          type: string
+          example: Unexpected error
