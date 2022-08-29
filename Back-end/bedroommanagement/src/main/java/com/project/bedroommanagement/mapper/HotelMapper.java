@@ -5,12 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.List;
 
 @AllArgsConstructor
 @Getter
 @Setter
-public class HotelMapper {
+public class HotelMapper implements Serializable {
     private String nameHotel;
     private TypeHotel typeHotel;
     private List<Long> bedrooms;
