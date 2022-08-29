@@ -13,11 +13,13 @@ import java.util.List;
 public class BedroomController {
     private BedroomService bedroomService;
 
+    //POST
     @PostMapping("/bedroom")
     public Bedroom insertBedroom(@RequestBody BedroomMapper newBedroom){
         return bedroomService.insertBedroom(newBedroom);
     }
 
+    //GET
     @GetMapping("/bedrooms")
     public List<Bedroom> getAllBedrooms(
             @RequestParam(name = "page", required = false)Long page,
@@ -27,11 +29,13 @@ public class BedroomController {
         return bedroomService.redirectingRequest(page, pageSize, locationPrice);
     }
 
+    //GET
     @GetMapping("/bedrooms_available")
     public List<Bedroom> getAllBedroomsAvailable(){
         return bedroomService.getAllBedroomsFilteredByAvailable();
     }
 
+    //PUT
     @PutMapping("/bedroom/{id}")
     public Bedroom putUpdate(
             @PathVariable(name = "id")Long id,
@@ -40,6 +44,7 @@ public class BedroomController {
         return bedroomService.putUpdateBedroomById(id, newBedroom);
     }
 
+    //PATCH
     @PatchMapping("/bedroom/{id}")
     public Bedroom patchUpdate(
             @PathVariable(name = "id")Long id,
@@ -48,6 +53,7 @@ public class BedroomController {
         return bedroomService.patchUpdateBedroomById(id, newBedroom);
     }
 
+    //DELETE
     @DeleteMapping("/bedroom/{id}")
     public String deleteBedroomById(@PathVariable(name = "id")Long id){
         return bedroomService.deleteBedroomById(id);

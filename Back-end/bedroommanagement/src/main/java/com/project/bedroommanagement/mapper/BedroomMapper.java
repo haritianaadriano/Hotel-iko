@@ -15,4 +15,5 @@ public class BedroomMapper {
     private Double locationPrice;
     private TypeLocation typeLocation;
     private List<Long> idTypebedroom;
+    private Long idHotel;
 }

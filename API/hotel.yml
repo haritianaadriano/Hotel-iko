@@ -19,7 +19,33 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Bedroom_by_hotel'
+                  $ref: '#/components/schemas/Hotel'
+  /hotel:
+    post:
+      tags:
+      - Hotel
+      summary: insert a new Hotel
+      operationId: insertNewHotel
+      requestBody:
+        description: This request is use to add a new "Hotel"
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/CreateHotel'
+        required: true
+      responses:
+        200:
+          description: Bedroom added
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Hotel'
+        400:
+          description: Bad request
   /hotel/{id}:
     put:
       tags:
@@ -547,6 +573,56 @@ paths:
           description: Bad request
 components:
   schemas:
+    Hotel:
+      type: object
+      properties:
+        idHotel:
+          type: integer
+          example: 1
+        nameHotel:
+          type: string
+          example: Novotel
+        typeHotel:
+          type: object
+          properties:
+            idHotelType:
+              type: integer
+              example: 1
+            hotelType:
+              type: string
+              example: Luxe
+        bedroom:
+          type: array
+          items:
+            type: object
+            properties:
+              IdBedroom:
+                type: integer
+                example: 1
+              reserved:
+                type: boolean
+                example: true
+              locationPrice:
+                type: integer
+                example: 50000
+              hotel:
+                type: string
+                example: novotel
+              typeLocation:
+                type: object
+                properties: 
+                  locationType:
+                    type: string
+                    example: VIP
+              typeBedroom:
+                type: object
+                properties:
+                  idBedroomType:
+                    type: integer
+                    example: 1
+                  bedroomType:
+                    type: string
+                    example: Large  
     Location_type:
       type: object
       properties:
@@ -595,21 +671,52 @@ components:
         hotelType:
           type: string
           example: Luxe
+    CreateHotel:
+      type: object
+      properties:
+        nameHotel:
+          type: string
+          example: Novotel
+        typeHotel:
+          type: object
+          properties:
+            idHotelType:
+              type: integer
+              example: 1
+            hotelType:
+              type: string
+              example: Luxe
+        bedrooms:
+          type: array
+          items:
+            type: integer
+            example: 1
     CreateBedroom:
       type: object
       properties:
-        prixLogement:
+        reserved:
+            type: boolean
+            example: false
+        locationPrice:
           type: integer
-          example: 100000
-        typeLogement:
-          type: string
-          example: VIP
-        typeBedroom:
-          type: string
-          example: Large
-        hotel:
-          type: string
-          example: Novotel
+          example: 500000
+        typeLocation:
+          type: object
+          properties:
+            idLocationType:
+              type: integer
+              example: 1
+            locationType:
+              type: string
+              example: VIP
+        idTypeBedroom:
+          type: array
+          items:
+            type: integer
+            example: 1
+        idHotel:
+          type: integer
+          example: 1
     CreateCustomer:
       type: object
       properties:
