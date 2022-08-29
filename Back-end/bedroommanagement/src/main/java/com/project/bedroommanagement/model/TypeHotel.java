@@ -15,10 +15,10 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @Getter
 @Setter
-public class BedroomType {
+public class TypeHotel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idBedroomType;
+    private Long idHotelType;
 
-    private String bedroomType;
+    private String hotelType;
 }

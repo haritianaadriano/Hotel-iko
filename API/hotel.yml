@@ -5,6 +5,50 @@ info:
 servers:
 - url: https://Subscription.io/
 paths:
+  /hotels:
+    get:
+      tags:
+      - Hotel
+      summary: get hotels list
+      operationId: getHotels
+      responses:
+        200:
+          description: All list of hotel
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Bedroom_by_hotel'
+  /hotel/{id}:
+    put:
+      tags:
+      - Hotel
+      summary: change hotel information
+      operationId: changeHotelInformation
+      parameters:
+      - name: Id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+          200:
+            description: change hotel information
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Bedroom_by_hotel'
+    delete:
+      tags:
+      - Hotel
+      summary: delete hotel by id
+      operationId: deleteHotelById
+      responses:
+        200:
+          description: hotel deleted Successfully
   /hotel/bedrooms:
     get:
       tags:
@@ -19,7 +63,7 @@ paths:
                 schema:
                   type: array
                   items:
-                    $ref: '#/components/schemas/Bedroom_by_hotel'
+                    $ref: '#/components/schemas/Bedroom'
   /bedroom:
     post:
       tags:
@@ -173,7 +217,7 @@ paths:
           description: Successfully deleted
         400:
           description: Bad request
-    patch:
+    put:
       tags:
         - Customer
       summary: Modifie some customer details
@@ -226,8 +270,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Customer'
-  /customer/{id}/search:
-    put:
+  /customer/{id}/change:
+    patch:
       tags:
       - Customer
       summary: Change Customer by Id
@@ -605,18 +649,30 @@ components:
         IdBedroom:
           type: integer
           example: 1
-        prixLogement:
+        reserved:
+          type: boolean
+          example: true
+        locationPrice:
           type: integer
           example: 50000
-        typeLogement:
-          type: string
-          example: VIP
-        typeBedroom:
-          type: string
-          example: 1lit
         hotel:
           type: string
-          example: Novotel
+          example: novotel
+        typeLocation:
+          type: object
+          properties: 
+            locationType:
+              type: string
+              example: VIP
+        typeBedroom:
+          type: object
+          properties:
+            idBedroomType:
+              type: integer
+              example: 1
+            bedroomType:
+              type: string
+              example: Large  
     CreateGroup:
       type: object
       properties:

@@ -28,8 +28,8 @@ public class Hotel {
     private String nameHotel;
 
     @OneToOne
-    private HotelType hotelType;
+    private TypeHotel typeHotel;
 
     @OneToMany
-    private List<Bedroom> bedrooms;
+    private List<Bedroom> bedroom;
 }

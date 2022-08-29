@@ -15,7 +15,7 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @Getter
 @Setter
-public class LocationType {
+public class TypeLocation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idLocationType;

@@ -27,5 +27,5 @@ public class Reservation {
     private Customer customer;
 
     @OneToMany
-    private List<Bedroom> bedroomsList;
+    private List<Bedroom> bedroom;
 }

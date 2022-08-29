@@ -23,11 +23,15 @@ public class Bedroom {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idBedroom;
 
+    private Boolean reserved;
+
     private Double locationPrice;
 
+    private String hotel;
+
     @OneToOne
-    private LocationType locationType;
+    private TypeLocation typeLocation;
 
     @OneToMany
-    private List<BedroomType> bedroomTypes;
+    private List<TypeBedroom> typeBedroom;
 }
