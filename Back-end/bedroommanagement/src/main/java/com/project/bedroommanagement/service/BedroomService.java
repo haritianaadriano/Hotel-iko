@@ -54,7 +54,7 @@ public class BedroomService {
 
         //-> 3. insert list of type of bedroom
         for(Long idTypeBedroom : listIdTypeBedroom){
-            TypeBedroom typeBedroom;
+            TypeBedroom typeBedroom = new TypeBedroom();
             Optional<TypeBedroom>typeBedroomOptional = typeBedroomRepository.findById(idTypeBedroom);
             if(typeBedroomOptional.isPresent()){
                 typeBedroom = typeBedroomOptional.get();
@@ -65,7 +65,7 @@ public class BedroomService {
         }
         newBedroom.setTypeBedroom(newtypeBedrooms);
 
-        //-> 4. save the insert and insert in database
+        //-> 4. save and insert in database
         bedroomRepository.save(newBedroom);
         return newBedroom;
     }

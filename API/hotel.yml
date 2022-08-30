@@ -31,9 +31,25 @@ paths:
         content:
           application/json:
             schema:
-              type: array
-              items:
-                $ref: '#/components/schemas/CreateHotel'
+              type: object
+              properties:
+                nameHotel:
+                  type: string
+                  example: Novotel
+                typeHotel:
+                  type: object
+                  properties:
+                    idHotelType:
+                      type: integer
+                      example: 1
+                    hotelType:
+                      type: string
+                      example: Luxe
+                bedrooms:
+                  type: array
+                  items:
+                    type: integer
+                    example: 1
         required: true
       responses:
         200:
@@ -101,9 +117,31 @@ paths:
         content:
           application/json:
             schema:
-              type: array
-              items:
-                $ref: '#/components/schemas/CreateBedroom'
+              type: object
+              properties:
+                reserved:
+                  type: boolean
+                  example: false
+                locationPrice:
+                  type: integer
+                  example: 50000000
+                typeLocation:
+                  type: object
+                  properties:
+                    idLocationType:
+                      type: integer
+                      example: 1
+                    locationType:
+                      type: string
+                      example: VIP
+                idTypeBedroom:
+                  type: array
+                  items:
+                    type: integer
+                    example: 1
+                idHotel:
+                 type: integer
+                 example: 1
         required: true
       responses:
         200:

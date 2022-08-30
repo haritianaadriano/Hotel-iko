@@ -5,13 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -30,6 +25,7 @@ public class Hotel {
     @OneToOne
     private TypeHotel typeHotel;
 
-    @OneToMany
-    private List<Bedroom> bedroom;
+    @OneToMany(targetEntity = Bedroom.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "bedroom_fk", referencedColumnName = "idHotel")
+    private List<Bedroom> bedroom = new ArrayList<>();
 }
