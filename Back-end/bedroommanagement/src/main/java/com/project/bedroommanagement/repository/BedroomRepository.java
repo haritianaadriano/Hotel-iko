@@ -11,4 +11,6 @@ public interface BedroomRepository extends JpaRepository<Bedroom, Long> {
     List<Bedroom> findByLocationPrice(Double locationPrice);
 
     List<Bedroom> findByReserved(Boolean search);
+
+    List<Bedroom> findByHotel(String hotel);
 }

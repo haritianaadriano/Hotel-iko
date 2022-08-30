@@ -31,6 +31,14 @@ public class HotelService {
      * @return list of hotels
      */
     public List<Hotel> getAllHotels(Long page, Long pageSize){
+        List<Bedroom> allBedroom = bedroomRepository.findAll();
+        List<Hotel> allHotel = hotelRepository.findAll();
+
+        for(Hotel hotel : allHotel){
+            List<Bedroom> eachBedroom = bedroomRepository.findByHotel(hotel.getNameHotel());
+            hotel.setBedroom(eachBedroom);
+        }
+
         if(page != null && pageSize != null){
             Pageable pageable = PageRequest.of(Math.toIntExact(page - 1), Math.toIntExact(pageSize));
             return hotelRepository.findAll(pageable).toList();
@@ -60,22 +68,9 @@ public class HotelService {
      */
     public Hotel insertHotel(HotelMapper hotelMapper){
         Hotel newHotel = new Hotel();
-        List<Bedroom> bedroomListForHotel = new ArrayList<>();
-        List<Long>  bedroomList= hotelMapper.getBedrooms();
-
         newHotel.setNameHotel(hotelMapper.getNameHotel());
         newHotel.setTypeHotel(hotelMapper.getTypeHotel());
-        for(Long id : bedroomList){
-            Optional<Bedroom> bedroomOptional = bedroomRepository.findById(id);
-            Bedroom bedroom;
-            if(bedroomOptional.isPresent()){
-                bedroom = bedroomOptional.get();
-                bedroomListForHotel.add(bedroom);
-            }else {
-                throw new NullPointerException("not found");
-            }
-        }
-        newHotel.setBedroom(bedroomListForHotel);
+
         hotelRepository.save(newHotel);
         return newHotel;
     }
