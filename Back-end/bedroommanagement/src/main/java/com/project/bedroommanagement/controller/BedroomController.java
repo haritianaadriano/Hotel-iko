@@ -22,29 +22,30 @@ public class BedroomController {
     private BedroomService bedroomService;
 
     //POST
-    @PostMapping("/bedroom")
+    @PostMapping("/hotel-room")
     public Bedroom insertBedroom(@RequestBody BedroomMapper newBedroom){
         return bedroomService.insertBedroom(newBedroom);
     }
 
     //GET
-    @GetMapping("/bedrooms")
+    @GetMapping("/hotel-rooms")
     public List<Bedroom> getAllBedrooms(
             @RequestParam(name = "page", required = false)Long page,
             @RequestParam(name = "page_size", required = false)Long pageSize,
-            @RequestParam(name = "location_price", required = false)Double locationPrice
+            @RequestParam(name = "location_price", required = false)Double locationPrice,
+            @RequestParam(name = "name_hotel", required = false)String hotelName
     ){
-        return bedroomService.redirectingRequest(page, pageSize, locationPrice);
+        return bedroomService.redirectingRequest(page, pageSize, locationPrice, hotelName);
     }
 
     //GET
-    @GetMapping("/bedrooms_available")
+    @GetMapping("/hotel-rooms-available")
     public List<Bedroom> getAllBedroomsAvailable(){
         return bedroomService.getAllBedroomsFilteredByAvailable();
     }
 
     //PUT
-    @PutMapping("/bedroom/{id}")
+    @PutMapping("/hotel-room/{id}")
     public Bedroom putUpdate(
             @PathVariable(name = "id")Long id,
             @RequestBody Bedroom newBedroom
@@ -53,7 +54,7 @@ public class BedroomController {
     }
 
     //PATCH
-    @PatchMapping("/bedroom/{id}")
+    @PatchMapping("/hotel-room/{id}")
     public Bedroom patchUpdate(
             @PathVariable(name = "id")Long id,
             @RequestBody Bedroom newBedroom
@@ -62,7 +63,7 @@ public class BedroomController {
     }
 
     //DELETE
-    @DeleteMapping("/bedroom/{id}")
+    @DeleteMapping("/hotel-room/{id}")
     public String deleteBedroomById(@PathVariable(name = "id")Long id){
         return bedroomService.deleteBedroomById(id);
     }

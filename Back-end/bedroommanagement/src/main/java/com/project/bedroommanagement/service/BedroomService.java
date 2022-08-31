@@ -93,6 +93,10 @@ public class BedroomService {
         return bedroomRepository.findByLocationPrice(locationPrice);
     }
 
+    public List<Bedroom> getBedroomByHotelName(String hotelName){
+        return bedroomRepository.findByHotel(hotelName);
+    }
+
     /**
      * just a function redirecting request to help request to do our task
      * @param page number of page you want to have
@@ -100,10 +104,14 @@ public class BedroomService {
      * @param locationPrice location price to filter bedroom list
      * @return list of bedroom
      */
-    public List<Bedroom> redirectingRequest(Long page, Long pageSize, Double locationPrice){
-        if(locationPrice != null && page == null && pageSize == null){
+    public List<Bedroom> redirectingRequest(Long page, Long pageSize, Double locationPrice, String hotelName){
+        if(locationPrice != null && page == null && pageSize == null && hotelName == null){
             return this.getBedroomByLocationPrice(locationPrice);
-        }else{
+        }
+        else if(locationPrice == null && page == null && pageSize == null && hotelName != null){
+            return this.getBedroomByHotelName(hotelName);
+        }
+        else{
             return this.getAllBedrooms(page, pageSize);
         }
     }
