@@ -11,6 +11,12 @@ paths:
       - Hotel
       summary: get hotels list
       operationId: getHotels
+      parameters:
+        - name: hotel_name
+          in: query
+          required: false
+          schema:
+            type: string
       responses:
         200:
           description: All list of hotel
@@ -45,7 +51,7 @@ paths:
                     hotelType:
                       type: string
                       example: Luxe
-                bedrooms:
+                hotel-rooms:
                   type: array
                   items:
                     type: integer
@@ -53,7 +59,7 @@ paths:
         required: true
       responses:
         200:
-          description: Bedroom added
+          description: hotel-room added
           content:
             application/json:
               schema:
@@ -82,7 +88,7 @@ paths:
                 schema:
                   type: array
                   items:
-                    $ref: '#/components/schemas/Bedroom_by_hotel'
+                    $ref: '#/components/schemas/hotel-room_by_hotel'
     delete:
       tags:
       - Hotel
@@ -91,29 +97,35 @@ paths:
       responses:
         200:
           description: hotel deleted Successfully
-  /hotel/bedrooms:
+  /hotel/{id_hotel}/hotel-rooms:
     get:
       tags:
-      - Bedroom
-      summary: get bedrooms by hotel
-      operationId: getBedroomByHotel
+      - hotel-room
+      summary: get hotel-rooms by hotel
+      operationId: gethotel-roomByHotel
+      parameters:
+        - name: id_hotel
+          in: path
+          required: true
+          schema:
+            type: integer
       responses:
           200:
-            description:  All bedroom filter by hotel
+            description:  All hotel-room filter by hotel
             content:
               application/json:
                 schema:
                   type: array
                   items:
-                    $ref: '#/components/schemas/Bedroom'
-  /bedroom:
+                    $ref: '#/components/schemas/hotel-room'
+  /hotel-room:
     post:
       tags:
-      - Bedroom
-      summary: Add a new "Bedroom"
-      operationId: addBedRoom
+      - hotel-room
+      summary: Add a new "hotel-room"
+      operationId: addhotel-room
       requestBody:
-        description: This request is use to add a new "Bedroom"
+        description: This request is use to add a new "hotel-room"
         content:
           application/json:
             schema:
@@ -134,7 +146,7 @@ paths:
                     locationType:
                       type: string
                       example: VIP
-                idTypeBedroom:
+                idTypehotel-room:
                   type: array
                   items:
                     type: integer
@@ -145,21 +157,47 @@ paths:
         required: true
       responses:
         200:
-          description: Bedroom added
+          description: hotel-room added
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Bedroom'
+                  $ref: '#/components/schemas/hotel-room'
         400:
           description: Bad request
-  /bedrooms:
+  /hotel-rooms:
     get:
       tags:
-      - Bedroom
-      summary: Get a list of "Bedroom"
-      operationId: getBedroom      
+      - hotel-room
+      summary: Get a list of "hotel-room"
+      operationId: gethotel-room  
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: page_size
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: location_price
+          in: query
+          required: false
+          schema:
+            type: number
+        - name: name_hotel
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: reserved
+          in: query
+          required: false
+          schema:
+            type: boolean    
       responses:
         200:
           description: Success
@@ -168,15 +206,15 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Bedroom'
+                  $ref: '#/components/schemas/hotel-room'
         400:
           description: Bad request
-  /bedroom/{id}:
+  /hotel-room/{id}:
     patch:
       tags:
-      - Bedroom
-      summary: Change some details of "Bedroom" by Id
-      operationId: pathBedroomById
+      - hotel-room
+      summary: Change some details of "hotel-room" by Id
+      operationId: pathhotel-roomById
       parameters:
       - name: Id
         in: path
@@ -187,14 +225,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateBedroom'
+              $ref: '#/components/schemas/Createhotel-room'
             examples:
               changeName:
-                summary: Change Bedroom content
+                summary: Change hotel-room content
                 value:
                   prixLogement: 500000
                   typeLogement: VIP
-                  typeBedroom: 1Lit
+                  typehotel-room: 1Lit
                   hotel: Novotel
       responses:
         200:
@@ -202,14 +240,14 @@ paths:
           content:
             application/json:
               schema:
-                  $ref: '#/components/schemas/Bedroom'
+                  $ref: '#/components/schemas/hotel-room'
         400:
           description: bad request
     delete:
       tags:
-      - Bedroom
-      summary: Delete "Bedroom" by Id
-      operationId: deleteBedroom
+      - hotel-room
+      summary: Delete "hotel-room" by Id
+      operationId: deletehotel-room
       parameters:
         - name: Id
           in: path
@@ -492,9 +530,9 @@ paths:
   /bedromms_type:
     get:
       tags:
-      - Bedroom_type
-      summary: Get a list of bedroom_type
-      operationId: getBedroom_type
+      - hotel-room_type
+      summary: Get a list of hotel-room_type
+      operationId: gethotel-room_type
       responses:
         200:
           description: Success
@@ -503,15 +541,15 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Bedroom_type'
+                  $ref: '#/components/schemas/hotel-room_type'
         400:
           description: Bad request
-  /bedroom_type/{id}:
+  /hotel-room_type/{id}:
     delete:
       tags:
-      - Bedroom_type
-      summary: Delete a bedroom_type by Id
-      operationId: delete bedroom_type by id
+      - hotel-room_type
+      summary: Delete a hotel-room_type by Id
+      operationId: delete hotel-room_type by id
       parameters:
       - name: id
         in: path
@@ -525,17 +563,17 @@ paths:
           description: Bad request
     put:
       tags:
-      - Bedroom_type
-      summary: Change bedroom_type by Id
-      description: change bedroom_type type
-      operationId: putBedroomType
+      - hotel-room_type
+      summary: Change hotel-room_type by Id
+      description: change hotel-room_type type
+      operationId: puthotel-roomType
       parameters:
       - name: id
         in: path
         required: true
         schema:
           type: integer
-      - name: bedroom_type
+      - name: hotel-room_type
         in: query
         required: true
         schema:
@@ -546,7 +584,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Bedroom_type'
+                $ref: '#/components/schemas/hotel-room_type'
         400:
           description: Bad request
   /location_types:
@@ -634,7 +672,7 @@ components:
           items:
             type: object
             properties:
-              IdBedroom:
+              Idhotel-room:
                 type: integer
                 example: 1
               reserved:
@@ -652,13 +690,13 @@ components:
                   locationType:
                     type: string
                     example: VIP
-              typeBedroom:
+              typehotel-room:
                 type: object
                 properties:
-                  idBedroomType:
+                  idhotel-roomType:
                     type: integer
                     example: 1
-                  bedroomType:
+                  hotel-roomType:
                     type: string
                     example: Large  
     Location_type:
@@ -670,19 +708,19 @@ components:
         locationType:
           type: string
           example: VIP
-    Bedroom_type:
+    hotel-room_type:
       type: object
       properties:
-        idBedroomType:
+        idhotel-roomType:
           type: integer
           example: 1
-        bedroomType:
+        hotel-roomType:
           type: string
           example: Large
-    Bedroom_by_hotel:
+    hotel-room_by_hotel:
       type: object
       properties:
-        IdBedroom:
+        Idhotel-room:
           type: integer
           example: 1
         prixLogement:
@@ -691,7 +729,7 @@ components:
         typeLogement: 
           type: string
           example: VIP
-        typeBedroom:
+        typehotel-room:
           type: string
           example: Large
         hotel:
@@ -724,12 +762,12 @@ components:
             hotelType:
               type: string
               example: Luxe
-        bedrooms:
+        hotel-rooms:
           type: array
           items:
             type: integer
             example: 1
-    CreateBedroom:
+    Createhotel-room:
       type: object
       properties:
         reserved:
@@ -747,7 +785,7 @@ components:
             locationType:
               type: string
               example: VIP
-        idTypeBedroom:
+        idTypehotel-room:
           type: array
           items:
             type: integer
@@ -788,10 +826,10 @@ components:
         phone:
           type: string
           example: +261 34 76 765 58
-    Bedroom:
+    hotel-room:
       type: object
       properties:
-        IdBedroom:
+        Idhotel-room:
           type: integer
           example: 1
         reserved:
@@ -809,13 +847,13 @@ components:
             locationType:
               type: string
               example: VIP
-        typeBedroom:
+        typehotel-room:
           type: object
           properties:
-            idBedroomType:
+            idhotel-roomType:
               type: integer
               example: 1
-            bedroomType:
+            hotel-roomType:
               type: string
               example: Large  
     CreateGroup:

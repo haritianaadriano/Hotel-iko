@@ -32,7 +32,6 @@ public class BedroomService {
     public Bedroom insertBedroom(BedroomMapper bedroomMapper){
         //variable sector
         Bedroom newBedroom = new Bedroom();
-        Hotel hotel = new Hotel();
         List<Long> listIdTypeBedroom = bedroomMapper.getIdTypeBedroom();
         List<TypeBedroom> newtypeBedrooms = new ArrayList<>();
 
@@ -43,24 +42,15 @@ public class BedroomService {
         newBedroom.setTypeLocation(bedroomMapper.getTypeLocation());
 
         //-> 2.insert the name of hotel
-        Optional<Hotel> hotelOptional = hotelRepository.findById(bedroomMapper.getIdHotel());
-        if(hotelOptional.isPresent()){
-            hotel = hotelOptional.get();
-        }else {
-            throw new NullPointerException("note found");
-        }
+        Hotel hotel = hotelRepository.findById(bedroomMapper.getIdHotel())
+                .orElseThrow(()->new NullPointerException("the hotel in "+bedroomMapper.getIdHotel()+" is not found"));
         newBedroom.setHotel(hotel.getNameHotel());
 
         //-> 3. insert list of type of bedroom
         for(Long idTypeBedroom : listIdTypeBedroom){
-            TypeBedroom typeBedroom = new TypeBedroom();
-            Optional<TypeBedroom>typeBedroomOptional = typeBedroomRepository.findById(idTypeBedroom);
-            if(typeBedroomOptional.isPresent()){
-                typeBedroom = typeBedroomOptional.get();
-                newtypeBedrooms.add(typeBedroom);
-            }else{
-                throw new NullPointerException("sorry not found");
-            }
+            TypeBedroom typeBedroom = typeBedroomRepository.findById(idTypeBedroom)
+                    .orElseThrow(()->new NullPointerException("not found"));
+            newtypeBedrooms.add(typeBedroom);
         }
         newBedroom.setTypeBedroom(newtypeBedrooms);
 
@@ -127,13 +117,8 @@ public class BedroomService {
      * @return the new-bedroom update
      */
     public Bedroom putUpdateBedroomById(Long id, Bedroom newBedroom){
-        Optional<Bedroom> optionalBedroom = bedroomRepository.findById(id);
-        Bedroom bedroom;
-        if(optionalBedroom.isPresent()){
-            bedroom = optionalBedroom.get();
-        }else {
-            throw new RuntimeException("sorry bedroom not found");
-        }
+        Bedroom bedroom = bedroomRepository.findById(id)
+                        .orElseThrow(()-> new NullPointerException("not found"));
 
         bedroom.setReserved(newBedroom.getReserved());
         bedroom.setTypeBedroom(newBedroom.getTypeBedroom());
@@ -153,13 +138,8 @@ public class BedroomService {
      * @return the new-bedroom
      */
     public Bedroom patchUpdateBedroomById(Long id, Bedroom newBedroom){
-        Optional<Bedroom> optionalBedroom = bedroomRepository.findById(id);
-        Bedroom bedroom;
-        if(optionalBedroom.isPresent()){
-            bedroom = optionalBedroom.get();
-        }else {
-            throw new RuntimeException("sorry bedroom not found");
-        }
+        Bedroom bedroom = bedroomRepository.findById(id)
+                .orElseThrow(()->new NullPointerException("not found"));
 
         if(newBedroom.getReserved() != null){
             bedroom.setReserved(newBedroom.getReserved());
@@ -192,7 +172,7 @@ public class BedroomService {
         if(bedroomOptional.isPresent()){
             bedroomRepository.deleteById(id);
             return "bedroom deleted";
-        }else if(bedroomOptional.isPresent() == false){
+        }else if(!bedroomOptional.isPresent()){
             throw new RuntimeException("sorry bedroom not found");
         }else{
             return "in process";
