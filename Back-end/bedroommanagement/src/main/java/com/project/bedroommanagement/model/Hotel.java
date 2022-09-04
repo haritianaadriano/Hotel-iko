@@ -22,6 +22,9 @@ public class Hotel {
     @Column(nullable = false)
     private String nameHotel;
 
+    @Column(nullable = true)
+    private String location;
+
     @OneToOne
     private TypeHotel typeHotel;
 

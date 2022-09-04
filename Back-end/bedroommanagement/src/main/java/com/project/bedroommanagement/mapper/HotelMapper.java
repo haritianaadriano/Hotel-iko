@@ -14,5 +14,6 @@ import java.util.List;
 public class HotelMapper implements Serializable {
     private String nameHotel;
     private TypeHotel typeHotel;
+    private Long country;
     private List<Long> bedrooms;
 }

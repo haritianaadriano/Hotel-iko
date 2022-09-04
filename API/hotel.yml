@@ -434,6 +434,28 @@ paths:
         400:
           description: Bad request   
   /countries:
+    post:
+      tags:
+      - Country
+      operationId: insertCountry
+      requestBody:
+        description: Customer object that needs to be added
+        content:
+          application/json:
+            schema:
+                  $ref: '#/components/schemas/CreateCountry'
+        required: false
+      responses:
+        200:
+          description: Customer added
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Country'
+        400:
+          description: Bad request
     get:
       tags:
       - Country
@@ -553,7 +575,7 @@ paths:
                 $ref: '#/components/schemas/Hotel_type'
         400:
           description: Bad request
-  /bedromms_type:
+  /hotel-room_type:
     get:
       tags:
       - hotel-room_type
@@ -737,7 +759,7 @@ components:
     hotel-room_type:
       type: object
       properties:
-        idhotel-roomType:
+        idBedroomType:
           type: integer
           example: 1
         hotel-roomType:
@@ -746,7 +768,7 @@ components:
     hotel-room_by_hotel:
       type: object
       properties:
-        Idhotel-room:
+        IdBedroom:
           type: integer
           example: 1
         prixLogement:
@@ -855,7 +877,7 @@ components:
     hotel-room:
       type: object
       properties:
-        Idhotel-room:
+        IdBedroom:
           type: integer
           example: 1
         reserved:
@@ -873,24 +895,21 @@ components:
             locationType:
               type: string
               example: VIP
-        typehotel-room:
+        typeBedroom:
           type: object
           properties:
-            idhotel-roomType:
+            idBedroom:
               type: integer
               example: 1
-            hotel-roomType:
+            bedroomType:
               type: string
               example: Large  
-    CreateGroup:
+    CreateCountry:
       type: object
       properties:
-        name:
+        countryName:
           type: string
-          example: G3
-        group:
-          type: string
-          example: goupe G3
+          example: Antananarivo
     Country:
       type: object
       properties:

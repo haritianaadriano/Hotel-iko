@@ -2,8 +2,10 @@ package com.project.bedroommanagement.service;
 
 import com.project.bedroommanagement.mapper.HotelMapper;
 import com.project.bedroommanagement.model.Bedroom;
+import com.project.bedroommanagement.model.Country;
 import com.project.bedroommanagement.model.Hotel;
 import com.project.bedroommanagement.repository.BedroomRepository;
+import com.project.bedroommanagement.repository.CountryRepository;
 import com.project.bedroommanagement.repository.HotelRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -20,6 +22,7 @@ public class HotelService {
     //variable sector
     private HotelRepository hotelRepository;
     private BedroomRepository bedroomRepository;
+    private CountryRepository countryRepository;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //GET MAPPING
@@ -30,7 +33,6 @@ public class HotelService {
      * @return list of hotels
      */
     public List<Hotel> getAllHotels(Long page, Long pageSize){
-        List<Bedroom> allBedroom = bedroomRepository.findAll();
         List<Hotel> allHotel = hotelRepository.findAll();
 
         for(Hotel hotel : allHotel){
@@ -66,9 +68,15 @@ public class HotelService {
      * @return the new-hotel inserted
      */
     public Hotel insertHotel(HotelMapper hotelMapper){
+        //Variable sector
+        List<Bedroom> bedroomList;
+        Country location = countryRepository.findById(hotelMapper.getCountry())
+                .orElseThrow(()->new NullPointerException("not found"));
+        //Functionement
         Hotel newHotel = new Hotel();
         newHotel.setNameHotel(hotelMapper.getNameHotel());
         newHotel.setTypeHotel(hotelMapper.getTypeHotel());
+        newHotel.setLocation(location.getCountryName());
 
         hotelRepository.save(newHotel);
         return newHotel;
