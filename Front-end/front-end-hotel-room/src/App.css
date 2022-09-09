@@ -6,7 +6,7 @@
   width: 100vw;
   height: 100vh;
   color: rgb(0, 0, 0);
-  background: linear-gradient(-45deg, rgb(245, 74, 74), rgb(89, 164, 226), rgb(19, 51, 99));
+  background: linear-gradient(-45deg, rgb(245, 74, 74), rgb(253, 158, 69), rgb(89, 164, 226), rgb(19, 51, 99));
   background-size: 400%, 400%;
   position: relative;
   animation: change 10s ease-in-out infinite;

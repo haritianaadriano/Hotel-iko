@@ -1,11 +1,17 @@
 import NavBar from "../controller/Navbar";
+import { motion } from "framer-motion";
+
 
 function VillePage() {
     return (
-        <div>
+        <motion.div
+        initial={{opacity: 0}}
+        animate={{opacity: 1}}
+        exit={{opacity: 0}}
+        >
             <NavBar />
             Ville
-        </div>
+        </motion.div>
     )
 }
  export default VillePage;
