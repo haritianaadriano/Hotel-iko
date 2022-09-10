@@ -25,6 +25,15 @@ public class Hotel {
     @Column(nullable = true)
     private String location;
 
+    @Column(nullable = true)
+    private String logo;
+
+    @Column(nullable = true)
+    private String image_1;
+
+    @Column(nullable = true)
+    private String image_2;
+
     @OneToOne
     private TypeHotel typeHotel;
 

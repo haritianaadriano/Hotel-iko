@@ -21,6 +21,9 @@ public class Country {
     @Column(length = 100)
     private String countryName;
 
+    @Column(nullable = true)
+    private String image;
+
     @OneToMany(targetEntity = Hotel.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "hotel_fk", referencedColumnName = "idCountry")
     private List<Hotel> hotel;

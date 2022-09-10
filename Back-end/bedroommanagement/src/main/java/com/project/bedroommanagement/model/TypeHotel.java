@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,6 +20,9 @@ public class TypeHotel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idHotelType;
+
+    @Column(nullable = true)
+    private String image;
 
     private String hotelType;
 }
