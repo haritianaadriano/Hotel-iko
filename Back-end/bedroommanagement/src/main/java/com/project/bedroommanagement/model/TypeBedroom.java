@@ -21,8 +21,5 @@ public class TypeBedroom {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idBedroomType;
 
-    @Column(nullable = true)
-    private String image;
-
     private String bedroomType;
 }

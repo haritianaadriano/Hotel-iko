@@ -1,22 +1,39 @@
-insert into type_bedroom(bedroom_type, image) values
-    ('familliale', '/bedroom-project/Front-end/front-end-hotel-room/src/components/assets/type-chambre/type_chambre_familliale.jpg'),
-    ('couple', '/bedroom-project/Front-end/front-end-hotel-room/src/components/assets/type-chambre/chambre_couple.jpg');
+insert into type_bedroom(bedroom_type) values
+    ('familliale'),
+    ('couple');
 
-insert into type_hotel(hotel_type, image) values
-    ('PRENIUM', '/bedroom-project/Front-end/front-end-hotel-room/src/components/assets/type-chambre/type_hotel_1.jpg'),
-    ('MEDIUM', '/bedroom-project/Front-end/front-end-hotel-room/src/components/assets/type-chambre/type_hotel_2.jpg');
+insert into type_hotel(hotel_type) values
+    ('PRENIUM'),
+    ('MEDIUM');
 
 insert into type_location(location_type) values
     ('MEDIUM'),('PRENIUM'),('PROMOTION');
 
 insert into hotel(location, name_hotel, type_hotel_id_hotel_type, image_1, image_2, logo) values
-    ('Antananarivo', 'carlton', 2, '../../assets/tana/carlton/carlton_2.jpg', '../../assets/tana/carlton/carlton_3.jpeg', '../../assets/tana/carlton/hotel_carlton_tana_logo.jpg'),
-    ('Antananarivo', 'centell', 1, '../../assets/tana/centell/centell_2.jpg', '../../assets/tana/centell/centell_3.jpg', '../../assets/tana/centell/hotel_centell_tana_logo.png'),
-    ('Antananarivo', 'colbert', 2, '../../assets/tana/colbert/colbert_2.jpg', '../../assets/tana/colbert/colbert_3.jpg', '../../assets/tana/colbert/hotel_colbert_tana_logo.jpg'),
-    ('Antananarivo', 'louvre', 1, '../../assets/tana/louvre/louvre_2.jpg', '../../assets/tana/louvre/louvre_3.jpg', '../../assets/tana/louvre/hotel_leLouvre_tana_logo.png'),
-    ('Antananarivo', 'radisson', 1, '../../assets/tana/radisson/radisson_2.jpg', '../../assets/tana/radisson/radisson_3.jpg', '../../assets/tana/radisson/hotel_radisson_tana_logo.jpg'),
-    ('Nosy-Be', 'anjamarango', 1, '../../assets/nosy-be/anjamarango/anjamarango_2.jpg', '../../assets/nosy-be/anjamarango/anjamarango_3.jpg', '../../assets/nosy-be/anjamarango/anjamarango_hotel_logo.png'),
-    ('Nosy-Be', 'palm-beach', 1, '../../assets/nosy-be/palm-beach/palm_beach_1.jpg', '../../assets/nosy-be/palm-beach/palm_beach_2.jpg', '../../assets/nosy-be/palm-beach/palm-beach-resort-Spa_logo.jpg'),
-    ('Nosy-Be','vanilla', 1, '../../assets/nosy-be/vanilla/vanila_hotel_2.jpg', '../../assets/nosy-be/vanilla/vanila-hotel-spa.jpg', '../../assets/nosy-be/vanilla/vanila_hotel_nosy_be.jpg'),
-    ('Majunga','baobab', 1, '../../assets/majunga/baobab/baobab_3.jpg', '../../assets/majunga/baobab/baobab_2.jpg', '../../assets/majunga/baobab/baobab_logo.jpg'),
-    ('Majunga','pap', 1, '../../assets/majunga/pap/pap_3.jpg', '../../assets/majunga/pap/paps_2.jpg', '../../assets/majunga/pap/pap_hotes_logo.jpg');
+    ('Antananarivo', 'carlton', 2, 'carlton_2.jpg', 'carlton_3.jpeg', 'hotel_carlton_logo.jpg'),
+    ('Antananarivo', 'centell', 1, 'centell_2.jpg', 'centell_3.jpg', 'hotel_centell_tana_logo.png'),
+    ('Antananarivo', 'colbert', 2, 'colbert_2.jpg', 'colbert_3.jpg', 'hotel_colbert_tana_logo.jpg'),
+    ('Antananarivo', 'louvre', 1, 'louvre_2.jpg', 'louvre_3.jpg', 'hotel_leLouvre_tana_logo.png'),
+    ('Antananarivo', 'radisson', 1, 'radisson_2.jpg', 'radisson_3.jpg', 'hotel_radisson_tana_logo.jpg'),
+    ('Nosy-Be', 'anjamarango', 1, 'anjamarango_2.jpg', 'anjamarango_3.jpg', 'anjamarango_hotel_logo.png'),
+    ('Nosy-Be', 'palm-beach', 1, 'palm_beach_1.jpg', 'palm_beach_2.jpg', 'palm-beach-resort-Spa_logo.jpg'),
+    ('Nosy-Be','vanilla', 1, 'vanila_hotel_2.jpg', 'vanila_hotel_3.jpg', 'vanila_logo.jpg'),
+    ('Majunga','baobab', 1, 'baobab_2.jpeg', 'baobab_3.jpg', 'baobab_logo.jpg'),
+    ('Majunga','pap', 1, 'paps_2.jpg', 'pap_3.jpg', 'pap_hotes_logo.jpg');
+
+insert into bedroom(hotel, location_price, reserved, type_location_id_location_type) values 
+    ('carlton', 185000, false, 3),
+    ('centell', 300000, true, 2),
+    ('colbert', 95000, true, 1),
+    ('louvre', 100000, false, 1),
+    ('radisson', 250000, false, 1),
+    ('anjamarango', 600000, true, 1),
+    ('palm-beach', 550000, false, 1),
+    ('vanilla', 475000, true, 1),
+    ('baobab', 350000, true, 1),
+    ('pap', 375000, false, 1);
+
+insert into country(country_name) values
+    ('Antananarivo'),
+    ('Nosy-Be'),
+    ('Majunga');

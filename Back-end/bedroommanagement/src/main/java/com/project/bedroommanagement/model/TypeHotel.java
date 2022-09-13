@@ -21,8 +21,5 @@ public class TypeHotel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idHotelType;
 
-    @Column(nullable = true)
-    private String image;
-
     private String hotelType;
 }
