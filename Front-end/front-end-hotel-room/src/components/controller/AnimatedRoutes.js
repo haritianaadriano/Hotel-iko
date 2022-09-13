@@ -1,9 +1,9 @@
 import React from "react";
 import { Route, Routes , useLocation } from 'react-router-dom';
-import AboutPage from "../pages/AboutPage";
-import HomePage from "../pages/HomePage";
-import HotelPage from "../pages/HotelPage";
-import VillePage from "../pages/VillePage";
+import AboutPage from "../pages/about-page/AboutPage";
+import HomePage from "../pages/home-page/HomePage";
+import HotelPage from "../pages/hotel-page/HotelPage";
+import VillePage from "../pages/ville-page/VillePage";
 
 import { AnimatePresence } from "framer-motion";
 

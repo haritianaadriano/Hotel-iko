@@ -23,6 +23,7 @@ public class BedroomService {
     private BedroomRepository bedroomRepository;
     private HotelRepository hotelRepository;
     private TypeBedroomRepository typeBedroomRepository;
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //POST MAPPING
     /**
