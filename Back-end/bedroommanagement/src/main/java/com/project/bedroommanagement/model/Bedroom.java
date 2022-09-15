@@ -25,6 +25,8 @@ public class Bedroom {
 
     private String hotel;
 
+    private String hotelLogo;
+
     @OneToOne
     private TypeLocation typeLocation;
 

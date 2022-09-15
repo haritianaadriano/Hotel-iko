@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,200&display=swap');
+
+.title{
+    font-family: 'Montserrat', sans-serif;
+}
+
 .body{
     margin-top: 5vh;
     height: 95vh;

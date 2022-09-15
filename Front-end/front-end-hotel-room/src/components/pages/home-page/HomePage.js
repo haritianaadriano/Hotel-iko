@@ -1,10 +1,32 @@
 import NavBar from "../../controller/Navbar";
 import { motion } from "framer-motion";
-import image from "../../assets/tana/radisson/hotel_radisson_tana_logo.jpg";
+import image from "../../assets/tana/hotel_radisson_tana_logo.jpg";
+import axios from "axios";
 import "./Home.css"
+import { useEffect, useState } from "react";
 
 
 function HomePage() {
+    //variable sector
+    const [hotelName, setHotelName] = useState("");
+    const [typeHotelRoom, setTypeHotelRoom] = useState("");
+    const [typeHotel, setTypeHotel] = useState("");
+    const [hotelLogo, setHotelLogo] = useState("");
+    const [price, setPrice] = useState(0);
+
+    const hotelRoomData = async () => {
+        try{
+            const response = await axios.get("http://localhost:8080/hotel-rooms");
+            console.log(response);
+        }catch(error){
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        hotelRoomData()
+    }, [])
+
     return (
         <motion.div
             initial={{width: 0}}
