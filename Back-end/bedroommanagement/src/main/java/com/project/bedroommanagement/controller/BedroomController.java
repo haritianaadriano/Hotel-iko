@@ -2,6 +2,7 @@ package com.project.bedroommanagement.controller;
 
 import com.project.bedroommanagement.mapper.BedroomMapper;
 import com.project.bedroommanagement.model.Bedroom;
+import com.project.bedroommanagement.repository.BedroomRepository;
 import com.project.bedroommanagement.service.BedroomService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +30,12 @@ public class BedroomController {
             @RequestParam(name = "name_hotel", required = false)String hotelName
     ){
         return bedroomService.redirectingRequest(page, pageSize, locationPrice, hotelName);
+    }
+
+    //GET
+    @GetMapping("/hotel-room/{id}")
+    public Bedroom getBedroomById(@PathVariable(name = "id")Long id){
+        return bedroomService.getBedroomById(id);
     }
 
     //GET

@@ -99,6 +99,12 @@ public class BedroomService {
         return bedroomRepository.findByHotel(hotelName);
     }
 
+    public Bedroom getBedroomById(Long id){
+        Bedroom theBedroom = bedroomRepository.findById(id)
+                .orElseThrow(()->new RuntimeException("not found"));
+        return theBedroom;
+    }
+
     /**
      * just a function redirecting request to help request to do our task
      * @param page number of page you want to have

@@ -133,3 +133,16 @@
     color: rgb(0, 0, 0);
     cursor: pointer;
 }
+.next{
+    margin: 50px;
+}
+.button-next{
+    background-color: rgb(45, 240, 119);
+    opacity: 0.6;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: rgb(0, 0, 0) !important;
+    font-family: 'Montserrat', sans-serif;
+}
