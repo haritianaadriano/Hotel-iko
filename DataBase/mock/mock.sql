@@ -22,7 +22,7 @@ insert into hotel(location, name_hotel, type_hotel_id_hotel_type, image_1, image
     ('Majunga','pap', 1, 'paps_2.jpg', 'pap_3.jpg', 'pap_hotes_logo.jpg');
 
 insert into bedroom(hotel, location_price, reserved, type_location_id_location_type, hotel_logo) values 
-    ('carlton', 185000, false, 3, 'hotel_carlton_logo.jpg'),
+    ('carlton', 185000, false, 3, 'hotel_carlton_tana_logo.jpg'),
     ('centell', 300000, true, 2, 'hotel_centell_tana_logo.png'),
     ('colbert', 95000, true, 1, 'hotel_colbert_tana_logo.jpg'),
     ('louvre', 100000, false, 1, 'hotel_leLouvre_tana_logo.png'),

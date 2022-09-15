@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import "./Home.css"
 import { useEffect, useState } from "react";
+import ReactPaginate from "react-paginate";
 
 
 function HomePage() {
@@ -10,49 +11,40 @@ function HomePage() {
     const [hotelName, setHotelName] = useState("");
     const [typeLocation, setTypeLocation] = useState("");
     const [hotelLogo, setHotelLogo] = useState("");
-    const [reserved, setReserved] = useState(true);
+    const [reserved, setReserved] =useState(false);
     const [price, setPrice] = useState(0);
-    const [page, setPage] = useState(0);
-    let test = 0;
 
-    function pagination(number){
-        number ++;
-        setPage(number);
-    }
-
-    const hotelRoomData = async () => {
+    const hotelRoomData = async (page) => {
         try{
             const response = await axios.get("http://localhost:8080/hotel-room/"+page);
+            console.log(response);
 
-            setReserved(response.data[page].reserved)
-            console.log(response.data[page].reserved);
-            console.log(reserved);
-
-            setHotelName(response.data[page].hotel);
-            console.log(response.data[page].hotel);
-            console.log(hotelName);
-            ////////////////////////////////////////////////
-            setTypeLocation(response.data[page].typeLocation.locationType);
-            console.log(response.data[page].typeLocation.locationType);
-            console.log(typeLocation);
-
-            ////////////////////////////////////////////////
-            setHotelLogo(response.data[page].hotelLogo);
-            console.log(response.data[page].hotelLogo);
-            console.log(hotelLogo);
+            setHotelName(response.data.hotel);
             ////////////////////////////////////////////////
 
-            setPrice(response.data[page].locationPrice);
-            console.log(response.data[page].locationPrice);
-            console.log(price);
-            
+            setReserved(response.data.reserved);
+            ////////////////////////////////////////////////
+            setTypeLocation(response.data.typeLocation.locationType);
+
+            ////////////////////////////////////////////////
+            setHotelLogo(response.data.hotelLogo);
+            ////////////////////////////////////////////////
+
+            setPrice(response.data.locationPrice);            
         }catch(error){
             console.log(error);
         }
     }
 
+    const handleClick = async (data) => {
+        console.log(data.selected);
+
+        let currentPage = data.selected +1;
+        hotelRoomData(currentPage);
+    }
+
     useEffect(() => {
-        hotelRoomData()
+        handleClick()
     })
 
     return (
@@ -74,7 +66,7 @@ function HomePage() {
                                 <h2>{hotelName}<br/><span>chambre avec terasse</span></h2>
                                 <div className="data">
                                     <h3>location type:<br/><span>{typeLocation}</span></h3>
-                                    <h3>hotel-room type:<br/><span>PRENIUM</span></h3>
+                                    <h3>reserved:<br/><span>{reserved.toString()}</span></h3>
                                     <h3>price:<br/><span>{price} Ar</span></h3>
                                 </div>
                                 <div className="reservation-btn">
@@ -84,7 +76,21 @@ function HomePage() {
                         </div>
                     </div>
                     <div className="next">
-                        <button className="button-next" onClick={pagination(test)}>View next</button>
+                        <ReactPaginate 
+                            nextLabel={"next"}
+                            previousLabel={"previous"}
+                            onPageChange={handleClick}
+                            pageCount={10}
+                            containerClassName={"pagination"}
+                            pageClassName={"page-item"}
+                            pageLinkClassName={"page-link"}
+                            previousLinkClassName={"page-link"}
+                            previousClassName={"page-item"}
+                            nextClassName={"page-item"}
+                            nextLinkClassName={"page-link"}
+                            breakClassName={"page-item"}
+                            breakLinkClassName={"page-link"}
+                        />
                     </div>
                 </div>
             </div>
