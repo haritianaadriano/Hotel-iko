@@ -4,7 +4,7 @@ import axios from "axios";
 import "./Home.css"
 import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
-
+import UserModal from "./modal";
 
 function HomePage() {
     //variable sector
@@ -13,6 +13,10 @@ function HomePage() {
     const [hotelLogo, setHotelLogo] = useState("");
     const [reserved, setReserved] =useState(false);
     const [price, setPrice] = useState(0);
+    const [modalOpen, setModalOpen] = useState(false);
+
+    const close = () => setModalOpen(false);
+    const open = () => setModalOpen(true);
 
     const hotelRoomData = async (page) => {
         try{
@@ -70,7 +74,13 @@ function HomePage() {
                                     <h3>price:<br/><span>{price} Ar</span></h3>
                                 </div>
                                 <div className="reservation-btn">
-                                    <button>Book</button>
+                                    <motion.button
+                                        whileHover={{scale: 1.1}}
+                                        whileTap={{scale: 0.9}}
+                                        onClick={() => (modalOpen ? close() : open())}
+                                    >
+                                        Book
+                                    </motion.button>
                                 </div>
                             </div>
                         </div>
@@ -93,6 +103,7 @@ function HomePage() {
                         />
                     </div>
                 </div>
+                {modalOpen && <UserModal modalOpen={modalOpen} handleClose={close} />}
             </div>
         </motion.div>
     );
