@@ -21,17 +21,17 @@ insert into hotel(location, name_hotel, type_hotel_id_hotel_type, image_1, image
     ('Majunga','baobab', 1, 'baobab_2.jpeg', 'baobab_3.jpg', 'baobab_logo.jpg'),
     ('Majunga','pap', 1, 'paps_2.jpg', 'pap_3.jpg', 'pap_hotes_logo.jpg');
 
-insert into bedroom(hotel, location_price, reserved, type_location_id_location_type) values 
-    ('carlton', 185000, false, 3),
-    ('centell', 300000, true, 2),
-    ('colbert', 95000, true, 1),
-    ('louvre', 100000, false, 1),
-    ('radisson', 250000, false, 1),
-    ('anjamarango', 600000, true, 1),
-    ('palm-beach', 550000, false, 1),
-    ('vanilla', 475000, true, 1),
-    ('baobab', 350000, true, 1),
-    ('pap', 375000, false, 1);
+insert into bedroom(hotel, location_price, reserved, type_location_id_location_type, hotel_logo) values 
+    ('carlton', 185000, false, 3, 'hotel_carlton_logo.jpg'),
+    ('centell', 300000, true, 2, 'hotel_centell_tana_logo.png'),
+    ('colbert', 95000, true, 1, 'hotel_colbert_tana_logo.jpg'),
+    ('louvre', 100000, false, 1, 'hotel_leLouvre_tana_logo.png'),
+    ('radisson', 250000, false, 1, 'hotel_radisson_tana_logo.jpg'),
+    ('anjamarango', 600000, true, 1, 'anjamarango_hotel_logo.png'),
+    ('palm-beach', 550000, false, 1, 'palm-beach-resort-Spa_logo.jpg'),
+    ('vanilla', 475000, true, 1, 'vanila_logo.jpg'),
+    ('baobab', 350000, true, 1, 'baobab_logo.jpg'),
+    ('pap', 375000, false, 1, 'pap_hotes_logo.jpg');
 
 insert into country(country_name) values
     ('Antananarivo'),
