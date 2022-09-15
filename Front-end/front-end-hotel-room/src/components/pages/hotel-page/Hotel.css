@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,200&display=swap');
+
+h2{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.th{
+    background-color: aliceblue;
+    opacity: 0.5;
+}
+
+.tb{
+    background-color: aliceblue;
+}
