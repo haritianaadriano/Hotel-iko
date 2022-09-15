@@ -14,6 +14,7 @@ une hotel</p>
     </ul>
 <h2>Dépendance</h2>
     <ul>
+        <li>De préférence entrer dans la branch master</li>
         <li>executer le script du mock dans le dossier $/Database/mock/mock.sql</li>
         <li>installer les dependances au front via: npm install</li>
         <li>lancer le serveur du back</li>
