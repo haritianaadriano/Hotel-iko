@@ -17,6 +17,6 @@ une hotel</p>
         <li>De préférence entrer dans la branch master</li>
         <li>executer le script du mock dans le dossier $/Database/mock/mock.sql</li>
         <li>installer les dependances au front via: npm install</li>
-        <li>lancer le serveur du back</li>
+        <li>pour les dependances du back veuiller juste le telechargement automatique ou relancer maven(pom.xml)</li>
     </ul>
 <h3>Tongasoa à HOTEL-iko</h3>
